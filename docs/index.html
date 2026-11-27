@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>필사 · 하루 한 줄</title>
+<meta name="description" content="하루 한 줄, 손으로 따라 쓰는 문구. 정한 시간에 한 줄이 오면 종이에 따라 쓰고 도장을 찍어요.">
+<meta property="og:title" content="필사">
+<meta property="og:description" content="하루 한 줄, 손으로 따라 쓰는 문구">
+<meta property="og:image" content="https://dev-fath.github.io/pilsa-releases/img/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/icon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3ebdd;
+    --sheet: #ede2cf;
+    --ink: #3b2a1e;
+    --muted: #8b7a66;
+    --seal: #7a2e2e;
+    --line: #d9cdb8;
+    --shadow: 0 22px 50px -34px rgba(59, 42, 30, .45);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 17px/1.85 "Gowun Batang", "Nanum Myeongjo", serif;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    /* 바랜 종이 결 */
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(150, 105, 60, .07), transparent 60%),
+      radial-gradient(ellipse at 90% 100%, rgba(150, 105, 60, .09), transparent 55%);
+    background-attachment: fixed;
+  }
+  a { color: var(--seal); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 64px 0 24px; text-align: center; }
+  .art { display: block; width: 100%; max-width: 760px; margin: 0 auto 28px; border-radius: 4px; }
+  h1 { font-weight: 700; font-size: 46px; letter-spacing: .3em; margin: 0 0 4px; padding-left: .3em; }
+  .tag { color: var(--muted); letter-spacing: .12em; margin: 0 0 26px; }
+  .lead { font-size: 19px; max-width: 540px; margin: 0 auto 30px; }
+  .btn { display: inline-flex; align-items: center; gap: 12px; background: var(--ink); color: var(--paper); text-decoration: none;
+    padding: 15px 34px; border-radius: 4px; letter-spacing: .2em; font-weight: 700; }
+  .btn::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #b0584f; }
+  .btn:hover { opacity: .92; }
+  .ver { color: var(--muted); font-size: 14px; margin-top: 12px; }
+  section { padding: 36px 0 12px; }
+  h2 { font-size: 24px; margin: 0 0 18px; display: flex; align-items: center; gap: 12px; }
+  h2::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--seal); flex: none; }
+  p { margin: 0 0 14px; }
+  .muted { color: var(--muted); font-size: 15px; }
+  .shots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .shots figure { margin: 0; text-align: center; }
+  .shots img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow); display: block; }
+  .shots figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+  .pair { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 520px; margin: 0 auto; }
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+  .steps li { counter-increment: s; display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .steps li:last-child { border-bottom: 0; }
+  .steps li::before { content: counter(s); flex: none; width: 34px; height: 34px; border: 1.5px solid var(--seal); color: var(--seal);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; margin-top: 2px; }
+  .steps b { display: block; }
+  .steps span { color: var(--muted); font-size: 15px; }
+  .quote { font-family: "Nanum Myeongjo", serif; font-size: 20px; text-align: center; padding: 26px 8px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0 0 14px; }
+  .quote small { display: block; font-size: 14px; color: var(--muted); margin-top: 8px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .82em; background: var(--sheet); border-radius: 3px; padding: .1em .4em; word-break: break-all; }
+  .closing { text-align: center; padding: 48px 0 8px; }
+  footer { padding: 44px 0 56px; color: var(--muted); font-size: 13px; text-align: center; }
+  footer p { margin: 4px 0; }
+  @media (max-width: 560px) {
+    header { padding-top: 40px; }
+    h1 { font-size: 38px; }
+    .shots { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="art" src="img/intro.png" alt="필사 — 하루 한 줄, 손으로 따라 쓰는 문구. 오늘 화면과 연필 · 볼펜 · 붓펜 · 만년필" width="1600" height="900">
+    <h1>필사</h1>
+    <p class="tag">하루 한 줄, 손으로 따라 쓰는 문구</p>
+    <p class="lead">정한 시간에 한 줄이 와요. 종이와 펜을 꺼내 천천히 따라 쓰고, 「다 썼어요」 를 누르면 그날에 도장이 찍혀요.</p>
+    <a class="btn" id="download" href="https://github.com/dev-fath/pilsa-releases/releases/latest">필사 받기</a>
+    <p class="ver" id="ver">무료 · 광고 없음 · 안드로이드</p>
+  </header>
+
+  <section>
+    <h2>내 펜의 글씨, 내 펜의 종이</h2>
+    <p>쓰는 도구를 고르면 문구가 그 펜의 손글씨와 종이로 바뀌어요. 연필은 갱지 위 흑연 결로, 볼펜은 줄 노트 위 잉크 뭉침으로, 붓펜은 한지 위 먹 농담으로, 만년필은 양피지 위 잉크가 고인 획 끝으로.</p>
+    <div class="shots">
+      <figure><img src="img/shot_pencil.webp" alt="연필 · 갱지" loading="lazy" width="540" height="1170"><figcaption>연필 · 갱지</figcaption></figure>
+      <figure><img src="img/shot_ballpoint.webp" alt="볼펜 · 줄 노트" loading="lazy" width="540" height="1170"><figcaption>볼펜 · 줄 노트</figcaption></figure>
+      <figure><img src="img/shot_brush.webp" alt="붓펜 · 한지" loading="lazy" width="540" height="1170"><figcaption>붓펜 · 한지</figcaption></figure>
+      <figure><img src="img/shot_fountain.webp" alt="만년필 · 양피지" loading="lazy" width="540" height="1170"><figcaption>만년필 · 양피지</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>하루 한 줄이면 충분해요</h2>
+    <ol class="steps">
+      <li><div><b>정한 시간에 한 줄이 와요</b><span>하루에 한 번만 알려 드려요. 알림에 오늘 문구가 다 들어 있어요.</span></div></li>
+      <li><div><b>종이에 천천히 따라 써요</b><span>앱은 보여 주기만 해요. 쓰는 건 내 손, 내 종이, 내 펜으로.</span></div></li>
+      <li><div><b>「다 썼어요」 — 도장 하나</b><span>자정을 넘겨 다 써도 그날 문구라면 그날에 찍혀요. 빠진 날은 캘린더에서 나중에 채울 수 있어요.</span></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>저작권이 끝난 시와 고전에서</h2>
+    <p class="quote">죽는 날까지 하늘을 우러러 한 점 부끄럼이 없기를<small>— 윤동주, 「서시」</small></p>
+    <p class="muted">김소월 · 윤동주 · 한용운 · 이육사 · 이상화 · 이장희 · 김영랑의 시, 이상의 소설, 황진이 · 정몽주 · 윤선도 들의 옛 시조에서 짧은 한두 줄을 골랐어요. 모두 작가 사후 70년이 지난 글이에요.</p>
+  </section>
+
+  <section>
+    <h2>만년필이 처음이라면, 입문 14과</h2>
+    <div class="pair">
+      <figure style="margin:0"><img src="img/shot_lesson.webp" alt="입문 5과 자음 — 원고지 본보기" loading="lazy" width="540" height="1170" style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow)"></figure>
+      <figure style="margin:0"><img src="img/shot_calendar.webp" alt="필사 기록 캘린더 — 쓴 날에 도장" loading="lazy" width="540" height="1170" style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow)"></figure>
+    </div>
+    <p style="margin-top:18px">만년필 알기 · 쥐는 법부터 직선 · 곡선, 자음 · 모음, 가나다라, 원고지 칸 맞추기까지 하루 한 과. 14과를 마치면 첫 필사로 이어져요. 바로 쓰고 싶다면 건너뛰어도 돼요.</p>
+  </section>
+
+  <section>
+    <h2>설치하기</h2>
+    <ol class="steps">
+      <li><div><b>휴대폰에서 이 페이지를 열고 「필사 받기」</b><span>최신 <code>pilsa-x.y.apk</code> 를 받아요.</span></div></li>
+      <li><div><b>받은 파일을 열어 설치</b><span>처음 한 번은 「이 출처 허용」 을 켜 달라고 물어봐요. 「앱 검사」 창이 뜨면 보내도, 건너뛰어도 괜찮아요.</span></div></li>
+      <li><div><b>새 버전은 앱이 알려 드려요</b><span>하루 한 번 확인해 새 버전이 나오면 한 번 알리고, 설정 → 정보에서 이 페이지를 열어요. 받은 파일을 그대로 설치하면 기록은 이어져요.</span></div></li>
+    </ol>
+    <p class="muted">안드로이드 7.0 이상. 받은 파일이 맞는지는 <a href="https://github.com/dev-fath/pilsa-releases/releases/latest">릴리즈 페이지</a>의 SHA-256 과 비교해 볼 수 있어요.</p>
+  </section>
+
+  <section>
+    <h2>기록은 휴대폰 안에만</h2>
+    <p>쓴 날 · 고른 펜 · 알림 시간은 모두 이 휴대폰에만 남아요. 회원가입도, 운영 서버도 없어요. 밖으로 나가는 건 새 버전 확인(GitHub 접속) 하나뿐이에요.</p>
+    <p><a href="privacy.html">개인정보 · 데이터 안내</a></p>
+  </section>
+
+  <section class="closing">
+    <p class="lead">오늘의 한 줄,<br>펜을 꺼내 볼까요?</p>
+    <a class="btn" id="download2" href="https://github.com/dev-fath/pilsa-releases/releases/latest">필사 받기</a>
+  </section>
+
+  <footer>
+    <p><a href="https://github.com/dev-fath/pilsa-releases/releases">모든 버전</a> · <a href="privacy.html">개인정보 · 데이터 안내</a></p>
+    <p>글꼴: 나눔손글씨 나는 이겨낸다 · 옥비체 · 할아버지의나눔, 마루 부리(NAVER), 김정철 손글씨(정림건축문화재단)</p>
+  </footer>
+</div>
+<script>
+  // 최신 버전과 설치 파일 주소를 가져와 버튼에 넣는다. 실패하면 릴리즈 페이지로 그대로 둔다.
+  fetch("https://api.github.com/repos/dev-fath/pilsa-releases/releases/latest")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (rel) {
+      if (!rel) return;
+      var apk = (rel.assets || []).filter(function (a) { return /\.apk$/.test(a.name); })[0];
+      if (apk) ["download", "download2"].forEach(function (id) { document.getElementById(id).href = apk.browser_download_url; });
+      var v = (rel.tag_name || "").replace(/^v/, "");
+      if (v) document.getElementById("ver").textContent = "무료 · 광고 없음 · 안드로이드 · 최신 " + v;
+    })
+    .catch(function () {});
+</script>
+</body>
+</html>
